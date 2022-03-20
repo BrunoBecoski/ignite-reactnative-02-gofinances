@@ -56,7 +56,7 @@ export function Register() {
     name: 'Categoria'
   });
 
-  const { navigate }:NavigationProp<ParamListBase> = useNavigation();
+  // const { navigate }:NavigationProp<ParamListBase> = useNavigation();
 
   const {
     control,
@@ -72,7 +72,9 @@ export function Register() {
   }
   
   function handleOpenSelectCategoryModal() {
-    setCategoryModalOpen(true);
+    // setTimeout(() => {
+      setCategoryModalOpen(true);
+    // }, 1000)
   }
 
   function handleCloseSelectCategoryModal() {
@@ -108,7 +110,6 @@ export function Register() {
 
       await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted));
 
-
       reset();
       setTransactionType('');
       setCategory({
@@ -116,7 +117,7 @@ export function Register() {
         name: 'Categoria'
       });
 
-      navigate('Listagem');
+      // navigate('Listagem');
     } catch (error ) {
       console.log(error);
       Alert.alert("Não foi possível salvar");
@@ -167,6 +168,7 @@ export function Register() {
             </TransactionsTypes>
 
             <CategorySelectButton 
+              testID="button-category"
               title={category.name}
               onPress={handleOpenSelectCategoryModal}
             />
@@ -178,7 +180,8 @@ export function Register() {
           />
         </Form>
 
-        <Modal 
+        <Modal
+          testID="modal-category"
           statusBarTranslucent={true}
           visible={categoryModalOpen} 
         >
