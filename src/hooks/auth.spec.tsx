@@ -68,4 +68,21 @@ describe('Auth Hook', () => {
       .not
       .toHaveProperty('id');
   });
+
+  it('should be error with incorrectly Google parameters', async () => {
+
+    const { result, waitForNextUpdate } = renderHook(() => useAuth(), {
+      wrapper: AuthProvider
+    });
+
+    try {
+      act(() => {
+        result.current.signInWithGoogle();
+      });
+      await waitForNextUpdate();
+    } catch {
+      expect(result.current.user)
+        .toEqual({});
+    }
+  });
 });
